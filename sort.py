@@ -16,7 +16,7 @@ def selection_sort(input_list):
         for j in range(i + 1, len(input_list)):
             if input_list[index] > input_list[j]:
                 index = j
-                input_list[i], input_list[index] = input_list[index], input_list[i]
+        input_list[i], input_list[index] = input_list[index], input_list[i]
 
     return input_list
 
@@ -68,7 +68,6 @@ def quick_sort(input_list):
 
 
 def quick_sort_python(input_list):
-
     if len(input_list) < 2:
         return input_list
     else:
@@ -126,6 +125,27 @@ def merge_sort(input_list):
 
 
 def heap_sort(input_list):
+    def heap_adjust(input_list, n, i):
+        largest = i
+        l = 2 * i + 1
+        r = 2 * i + 2
+        if l < n and input_list[l] > input_list[largest]:
+            largest = l
+        if r < n and input_list[r] > input_list[largest]:
+            largest = r
+        if largest != i:
+            input_list[largest], input_list[i] = input_list[i], input_list[largest]
+            heap_adjust(input_list, n, largest)
+
+    n = len(input_list)
+
+    for i in range(n // 2, -1, -1):
+        heap_adjust(input_list, n, i)
+
+    for i in range(n - 1, 0, -1):
+        input_list[0], input_list[i] = input_list[i], input_list[0]
+        heap_adjust(input_list, i, 0)
+
     return input_list
 
 
@@ -137,11 +157,19 @@ def count_sort(input_list):
     return input_list
 
 
+def test(sort_m):
+    import random
+    flag = True
+    for i in range(100):
+        a_list = [random.randint(0, 1000) for i in range(1000)]
+
+        if list(sorted(a_list)) == sort_m(a_list):
+            continue
+        else:
+            flag = False
+            break
+    return flag
+
+
 if __name__ == "__main__":
-    sort_m = quick_sort_python
-    a = [5, 1, 3, 9, 21, 2, 8, 4, 7, 16, 6, 10]
-    print(a)
-    print(sort_m(a))
-    b = [5, 1, 3, 9, 21, 2, 8, 9, 7, 16, 5, 10]
-    print(b)
-    print(sort_m(b))
+    print(test(heap_sort))
