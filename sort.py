@@ -150,18 +150,51 @@ def heap_sort(input_list):
 
 
 def redix_sort(input_list):
+    i = 0
+    max_num = max(input_list)
+    max_len = len(str(max_num))
+    while i < max_len:
+        bucket_list = [[] for i in range(10)]
+        for x in input_list:
+            bucket_list[x // (10 ** i) % 10].append(x)
+        input_list.clear()
+        for bucket in bucket_list:
+            for num in bucket:
+                input_list.append(num)
+        i += 1
     return input_list
 
 
 def count_sort(input_list):
-    return input_list
+    if len(input_list) == 0:
+        return input_list
+
+    len_list = len(input_list)
+    max_num = max(input_list)
+    min_num = min(input_list)
+
+    count_list_len = max_num - min_num + 1
+    count_list = [0 for _ in range(count_list_len)]
+
+    for num in input_list:
+        count_list[num - min_num] += 1
+
+    for i in range(1, count_list_len):
+        count_list[i] += count_list[i - 1]
+
+    order_list = [0 for _ in range(len_list)]
+
+    for i in reversed(range(0, len_list)):
+        order_list[count_list[input_list[i] - min_num] - 1] = input_list[i]
+        count_list[input_list[i] - min_num] -= 1
+    return order_list
 
 
 def test(sort_m):
     import random
     flag = True
     for i in range(100):
-        a_list = [random.randint(0, 1000) for i in range(1000)]
+        a_list = [random.randint(0, 1000) for _ in range(1000)]
 
         if list(sorted(a_list)) == sort_m(a_list):
             continue
@@ -172,4 +205,4 @@ def test(sort_m):
 
 
 if __name__ == "__main__":
-    print(test(heap_sort))
+    print(test(count_sort))
