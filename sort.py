@@ -190,6 +190,21 @@ def count_sort(input_list):
     return order_list
 
 
+def bucket_sort(input_list):
+    # bucket length = 1
+    bucket_dict = {}
+    for num in input_list:
+        if num not in bucket_dict:
+            bucket_dict[num] = 1
+        else:
+            bucket_dict[num] += 1
+    output_list = list()
+    for key in sorted(bucket_dict.keys()):
+        for _ in range(bucket_dict[key]):
+            output_list.append(key)
+    return output_list
+
+
 def test(sort_m):
     import random
     flag = True
@@ -205,4 +220,4 @@ def test(sort_m):
 
 
 if __name__ == "__main__":
-    print(test(count_sort))
+    print(test(bucket_sort))
