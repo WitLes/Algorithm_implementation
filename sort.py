@@ -46,8 +46,8 @@ def quick_sort(input_list):
     def q_sort(input_list, left, right):
         if left < right:
             base_index = partition(input_list, left, right)
-            q_sort(input_list, left, base_index)
-            q_sort(input_list, base_index + 1, right)
+            input_list = q_sort(input_list, left, base_index - 1)
+            input_list = q_sort(input_list, base_index + 1, right)
 
         return input_list
 
@@ -90,6 +90,20 @@ def shell_sort(input_list):
             input_list[j + gap] = tmp
         gap //= 2
 
+    return input_list
+
+
+def shell_sort2(input_list):
+    gap = len(input_list) // 2
+    while gap > 0:
+        for i in range(gap, len(input_list)):
+            tmp = input_list[i]
+            j = i - gap
+            while j >= 0 and input_list[j] > tmp:
+                input_list[j + gap] = input_list[j]
+                j -= gap
+            input_list[j + gap] = tmp
+        gap //= 2
     return input_list
 
 
@@ -220,4 +234,6 @@ def test(sort_m):
 
 
 if __name__ == "__main__":
-    print(test(bucket_sort))
+    test_m = heap_sort
+    print(test_m)
+    print(test(test_m))
