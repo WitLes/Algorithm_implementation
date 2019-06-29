@@ -129,6 +129,24 @@ def reverse_link_list3(head):
     return reverse_head_sub
 
 
+def find_first_mutual_mode(head1, head2):
+    stack1 = []
+    stack2 = []
+    p1 = head1
+    p2 = head2
+    while p1 is not None:
+        stack1.append(p1)
+        p1 = p1.next
+    while p2 is not None:
+        stack2.append(p2)
+        p2 = p2.next
+    while len(stack1) > 0 and len(stack2) > 0:
+        node1 = stack1.pop()
+        node2 = stack2.pop()
+        if node1.value != node2.value:
+            return node1.next
+    return None
+
 def test_merge_two_sorted_list():
     head1 = gene_link_list([1, 2, 4, 5, 8, 9])
     head2 = gene_link_list([2, 4, 7, 8, 12, 15])

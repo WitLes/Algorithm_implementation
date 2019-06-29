@@ -14,6 +14,17 @@ def full_permutation(input_list):
     return permutation(input_list, 0)
 
 
+def count_trans_number(x):
+    if len(x) == 1:
+        return 1
+    if len(x) == 2:
+        if x[0] > 2 or (x[0] == 2 and x[1] > 5):
+            return 1
+        else:
+            return 2
+    return count_trans_number(x[0]) * count_trans_number(x[1:]) + count_trans_number(x[0:2]) * count_trans_number(x[2:])
+
+
 def test():
     input_list = [1, 2, 3, 4]
     full_permutation(input_list)

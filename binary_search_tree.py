@@ -177,13 +177,27 @@ def del_bst_node(root, value):
     return root
 
 
+def find_bst_max_k(root, k):
+    record_list = []
+
+    def mid_order(root):
+        if root is not None:
+            mid_order(root.left)
+            record_list.append(root)
+            mid_order(root.right)
+
+    mid_order(root)
+    return record_list[-k]
+
+
 def test():
-    input_list = list(set([random.randint(0, 100) for i in range(30)]))
+    input_list = list(set([random.randint(0, 100) for i in range(10)]))
     random.shuffle(input_list)
     root = generate_bst(input_list)
     mid_order_print(root)
-    del_bst_node(root, input_list[10])
-    mid_order_print(root)
+    #del_bst_node(root, input_list[2])
+
+    print(find_bst_max_k(root, 2))
 
 
 if __name__ == "__main__":

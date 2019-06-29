@@ -123,6 +123,16 @@ def bt_image(root):
         return root
 
 
+def bt_image2(root):
+    if root is None:
+        return None
+    else:
+        root.left, root.right = root.right, root.left
+        bt_image2(root.left)
+        bt_image2(root.right)
+        return root
+
+
 def bt_max_width(root):
     if root is None:
         return 0
@@ -170,11 +180,63 @@ def bt_next_node_mid_order(node):
             return None
 
 
+def has_sub_tree(root1, root2):
+    # not test
+    def does_have_tree(root1, root2):
+        if root2 is None:
+            return True
+        if root1 is None:
+            return False
+        if root1.value == root2.value:
+            return does_have_tree(root1.left, root2.left) and does_have_tree(root1.right, root2.right)
+
+    result = False
+
+    if root1 is not None and root2 is not None:
+        if root1.value == root2.value:
+            result = does_have_tree(root1, root2)
+        if not result:
+            result = has_sub_tree(root1.left, root2)
+        if not result:
+            result = has_sub_tree(root1.right, root2)
+
+    return result
+
+
+def is_symmetrical_tree(root):
+    def _is_symmetrical_tree(root1, root2):
+        if root1 is None and root2 is None:
+            return True
+        elif root1 is None or root2 is None:
+            return False
+        else:
+            return _is_symmetrical_tree(root1.left, root2.right) and _is_symmetrical_tree(root1.right, root2.left)
+
+    return _is_symmetrical_tree(root, root)
+
+
+def is_post_bst(input_list):
+    if len(input_list) == 0 or len(input_list) == 1:
+        return True
+    if len(input_list) == 2:
+        return True
+    root_num = input_list[-1]
+    index = 0
+    for i in range(len(input_list) - 1):
+        if input_list[i] < root_num:
+            index += 1
+    if len(input_list[index:-1]) > 0:
+        if min(input_list[index:-1]) < root_num:
+            return False
+
+    return is_post_bst(input_list[0:index]) and is_post_bst(input_list[index:-1])
+
+
 def test():
     input_list = [i for i in range(100)]
     root = generate_bt(input_list)
     print_by_layer(root)
-    bt_image(root)
+    bt_image2(root)
     print_by_layer(root)
 
 
@@ -185,5 +247,10 @@ def test_reconstruct_bt():
     print_by_layer(root)
 
 
+def test_is_post_bst():
+    ins = [5, 7, 6, 9, 10, 11, 8]
+    print(is_post_bst(ins))
+
+
 if __name__ == "__main__":
-    test_reconstruct_bt()
+    test_is_post_bst()

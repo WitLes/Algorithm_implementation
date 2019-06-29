@@ -64,6 +64,27 @@ def a_pow_b(a, b):
     return ans
 
 
+def find_lost_num(input_list):
+    left = 0
+    right = len(input_list) - 1
+    while left < right:
+        mid = (left + right) >> 1
+        if input_list[mid] != mid:
+            right = mid
+        else:
+            left = mid + 1
+    return left
+
+
+def reverse_string(string):
+    low = 0
+    high = len(string) - 1
+    while low < high:
+        string[low], string[high] = string[high], string[low]
+
+    return string
+
+
 def test():
     input_list = [random.randint(0, 50) for _ in range(20)]
     x = find_k_heap(input_list, 5)
@@ -77,5 +98,16 @@ def test_a_pow_b():
     print(9 ** 13)
 
 
+def test_find_lost_num():
+    input_list = [i for i in range(20)]
+    input_list.pop(9)
+    print(find_lost_num(input_list))
+
+
+def test_reverse_string():
+    print(reverse_string('abcdefg'))
+    print(reverse_string('abcdefgh'))
+
+
 if __name__ == "__main__":
-    test()
+    test_reverse_string()

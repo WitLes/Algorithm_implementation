@@ -233,6 +233,23 @@ def test(sort_m):
     return flag
 
 
+def find_more_than_half(input_list):
+    if len(input_list) == 0:
+        return None
+    result = input_list[0]
+    times = 1
+
+    for i in range(1, len(input_list)):
+        if not times:
+            result = input_list[i]
+            times = 1
+        elif input_list[i] == result:
+            times += 1
+        else:
+            times -= 1
+    return result
+
+
 if __name__ == "__main__":
     test_m = heap_sort
     print(test_m)
