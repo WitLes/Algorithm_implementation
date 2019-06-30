@@ -166,9 +166,10 @@ def del_bst_node(root, value):
         if root.left is None and root.right is None:
             root = None
         elif root.left is None:
-            root = root.left
-        elif root.right is None:
             root = root.right
+        elif root.right is None:
+            root = root.left
+
         elif root.left and root.right:
             min_node = find_bst_min(root.right)
             root.value = min_node.value
@@ -195,7 +196,7 @@ def test():
     random.shuffle(input_list)
     root = generate_bst(input_list)
     mid_order_print(root)
-    #del_bst_node(root, input_list[2])
+    # del_bst_node(root, input_list[2])
 
     print(find_bst_max_k(root, 2))
 

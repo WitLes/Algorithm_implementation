@@ -147,6 +147,7 @@ def find_first_mutual_mode(head1, head2):
             return node1.next
     return None
 
+
 def test_merge_two_sorted_list():
     head1 = gene_link_list([1, 2, 4, 5, 8, 9])
     head2 = gene_link_list([2, 4, 7, 8, 12, 15])

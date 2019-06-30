@@ -93,20 +93,6 @@ def shell_sort(input_list):
     return input_list
 
 
-def shell_sort2(input_list):
-    gap = len(input_list) // 2
-    while gap > 0:
-        for i in range(gap, len(input_list)):
-            tmp = input_list[i]
-            j = i - gap
-            while j >= 0 and input_list[j] > tmp:
-                input_list[j + gap] = input_list[j]
-                j -= gap
-            input_list[j + gap] = tmp
-        gap //= 2
-    return input_list
-
-
 def merge_sort(input_list):
     def merge(left, right):
         merged_list = []
@@ -250,7 +236,11 @@ def find_more_than_half(input_list):
     return result
 
 
+def heap_insert(heap, num):
+    heap.append(num)
+
+
 if __name__ == "__main__":
-    test_m = heap_sort
+    test_m = redix2
     print(test_m)
     print(test(test_m))

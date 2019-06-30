@@ -123,16 +123,6 @@ def bt_image(root):
         return root
 
 
-def bt_image2(root):
-    if root is None:
-        return None
-    else:
-        root.left, root.right = root.right, root.left
-        bt_image2(root.left)
-        bt_image2(root.right)
-        return root
-
-
 def bt_max_width(root):
     if root is None:
         return 0
@@ -225,6 +215,8 @@ def is_post_bst(input_list):
     for i in range(len(input_list) - 1):
         if input_list[i] < root_num:
             index += 1
+        else:
+            break
     if len(input_list[index:-1]) > 0:
         if min(input_list[index:-1]) < root_num:
             return False

@@ -169,6 +169,20 @@ def package_q(w, v, total):
     return dp_array[-1][-1]
 
 
+def pkg(weight_list, value_list, total):
+    len_w = len(weight_list)
+    weight_list.insert(0, 0)
+    value_list.insert(0, 0)
+    dp_array = [[0 for i in range(total + 1)] for j in range(len_w + 1)]
+    for i in range(len_w + 1):
+        for j in range(total + 1):
+            if weight_list[i] <= j:
+                dp_array[i][j] = max(dp_array[i - 1][j], dp_array[i - 1][j - weight_list[i]] + value_list[i])
+            else:
+                dp_array[i][j] = dp_array[i - 1][j]
+    return dp_array[-1][-1]
+
+
 def cut_rope(n):
     if n == 0:
         return 0
