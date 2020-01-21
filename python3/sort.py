@@ -208,7 +208,7 @@ def bucket_sort(input_list):
 def test(sort_m):
     import random
     flag = True
-    for i in range(100):
+    for _ in range(100):
         a_list = [random.randint(0, 1000) for _ in range(1000)]
 
         if list(sorted(a_list)) == sort_m(a_list):
@@ -241,6 +241,6 @@ def heap_insert(heap, num):
 
 
 if __name__ == "__main__":
-    test_m = redix2
+    test_m = redix_sort
     print(test_m)
     print(test(test_m))
