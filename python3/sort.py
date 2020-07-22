@@ -1,6 +1,3 @@
-import pdb
-
-
 def bubble_sort(input_list):
     for i in range(len(input_list)):
         for j in range(len(input_list) - 1 - i):
@@ -207,6 +204,7 @@ def bucket_sort(input_list):
 
 def test(sort_m):
     import random
+
     flag = True
     for _ in range(100):
         a_list = [random.randint(0, 1000) for _ in range(1000)]

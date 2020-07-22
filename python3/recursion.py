@@ -25,10 +25,24 @@ def count_trans_number(x):
     return count_trans_number(x[0]) * count_trans_number(x[1:]) + count_trans_number(x[0:2]) * count_trans_number(x[2:])
 
 
-def test():
-    input_list = [1, 2, 3, 4]
-    full_permutation(input_list)
+def permutation_string(string):
 
+    def permu(string, index):
+        if index == len(string) - 1:
+            print("".join(string))
+            
+        for i in range(index, len(string)):
+            string[i], string[index] = string[index], string[i]
+            permu(string, index + 1)
+            string[i], string[index] = string[index], string[i]
+    return permu(list(string), 0)
+        
+
+def test():
+    # input_list = [1, 2, 3, 4]
+    # full_permutation(input_list)
+    # string = "abc"
+    # permutation_string(string)
 
 if __name__ == "__main__":
     test()

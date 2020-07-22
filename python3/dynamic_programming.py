@@ -1,7 +1,3 @@
-import os
-import pdb
-
-
 def two_sum(input_list, sum_num):
     tuples = []
     map_dict = {}
@@ -103,8 +99,10 @@ def longest_common_subsequences_length(string1, string2):
     if string1[0] == string2[0]:
         return longest_common_subsequences_length(string1[1:], string2[1:]) + 1
     else:
-        return max(longest_common_subsequences_length(string1[1:], string2),
-                   longest_common_subsequences_length(string1, string2[1:]))
+        return max(
+            longest_common_subsequences_length(string1[1:], string2),
+            longest_common_subsequences_length(string1, string2[1:]),
+        )
 
 
 def longest_common_subsequence_length_dp(string1, string2):
@@ -121,9 +119,12 @@ def longest_common_subsequence_length_dp(string1, string2):
                 dp_array[i][j] = max(dp_array[i][j - 1], dp_array[i - 1][j])
 
     i, j = len(string1), len(string2)
-    sub_sequence = ''
+    sub_sequence = ""
     while i > 0 and j > 0:
-        if dp_array[i][j] == dp_array[i - 1][j - 1] + 1 and string1[i - 1] == string2[j - 1]:
+        if (
+            dp_array[i][j] == dp_array[i - 1][j - 1] + 1
+            and string1[i - 1] == string2[j - 1]
+        ):
             sub_sequence = string1[i - 1] + sub_sequence
             i -= 1
             j -= 1
@@ -139,14 +140,14 @@ def longest_common_substring_dp(string1, string2):
         return 0
     dp_array = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
     max_len = 0
-    lcs_str = ''
+    lcs_str = ""
     for i in range(1, len(string1) + 1):
         for j in range(1, len(string2) + 1):
             if string1[i - 1] == string2[j - 1]:
                 dp_array[i][j] = dp_array[i - 1][j - 1] + 1
                 if dp_array[i][j] > max_len:
                     max_len = dp_array[i][j]
-                    lcs_str = string1[i - max_len:i]
+                    lcs_str = string1[i - max_len : i]
             else:
                 dp_array[i][j] = 0
 
@@ -161,7 +162,9 @@ def package_q(w, v, total):
     for i in range(1, num_weight + 1):
         for j in range(1, total + 1):
             if w[i] <= j:
-                dp_array[i][j] = max(dp_array[i - 1][j - w[i]] + v[i], dp_array[i - 1][j])
+                dp_array[i][j] = max(
+                    dp_array[i - 1][j - w[i]] + v[i], dp_array[i - 1][j]
+                )
             else:
                 dp_array[i][j] = dp_array[i - 1][j]
     for line in dp_array:
@@ -177,7 +180,10 @@ def pkg(weight_list, value_list, total):
     for i in range(len_w + 1):
         for j in range(total + 1):
             if weight_list[i] <= j:
-                dp_array[i][j] = max(dp_array[i - 1][j], dp_array[i - 1][j - weight_list[i]] + value_list[i])
+                dp_array[i][j] = max(
+                    dp_array[i - 1][j],
+                    dp_array[i - 1][j - weight_list[i]] + value_list[i],
+                )
             else:
                 dp_array[i][j] = dp_array[i - 1][j]
     return dp_array[-1][-1]

@@ -1,4 +1,3 @@
-import pdb
 import random
 
 
@@ -9,7 +8,7 @@ class Node(object):
         self.right = right
 
     def __repr__(self):
-        return str(self.value) + ' '
+        return str(self.value) + " "
 
 
 def generate_bst(input_list):
@@ -79,7 +78,7 @@ def print_by_layer(root):
         cur_len = len(queue)
         for i in range(cur_len):
             cur_node = queue.pop(0)
-            print(cur_node, end='')
+            print(cur_node, end="")
             if cur_node.left is not None:
                 queue.append(cur_node.left)
             if cur_node.right is not None:

@@ -199,11 +199,19 @@ def is_symmetrical_tree(root):
             return True
         elif root1 is None or root2 is None:
             return False
+        elif root1.value != root2.value:
+            return False
         else:
             return _is_symmetrical_tree(root1.left, root2.right) and _is_symmetrical_tree(root1.right, root2.left)
 
     return _is_symmetrical_tree(root, root)
 
+
+def is_symmetrical(root):
+    def _is_sym(root1, root2):
+        if root1
+
+    return is_sym(root, root)
 
 def is_post_bst(input_list):
     if len(input_list) == 0 or len(input_list) == 1:

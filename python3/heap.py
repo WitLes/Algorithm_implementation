@@ -1,4 +1,3 @@
-import os
 import random
 
 
@@ -12,9 +11,9 @@ def pop(input_list):
     pop_num = input_list[0]
     list_len = len(input_list)
     input_list[0], input_list[-1] = input_list[-1], input_list[0]
+    ans = input_list.pop(-1)
     siftdown(input_list, list_len - 1, 0)
-    input_list.pop(-1)
-    return pop_num,
+    return ans
 
 
 def insert(input_list, num):
@@ -25,9 +24,12 @@ def insert(input_list, num):
 
 def siftup(input_list, i):
     cur_index = i
-    parent = (i - 1) >> 1
+    parent = (i - 1) // 2
     while cur_index > 0 and input_list[cur_index] > input_list[parent]:
-        input_list[cur_index], input_list[parent] = input_list[parent], input_list[cur_index]
+        input_list[cur_index], input_list[parent] = (
+            input_list[parent],
+            input_list[cur_index],
+        )
         index = parent
         parent = (index - 1) >> 1
 

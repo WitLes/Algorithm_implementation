@@ -1,4 +1,3 @@
-import pdb
 import random
 
 
@@ -105,8 +104,8 @@ def test_find_lost_num():
 
 
 def test_reverse_string():
-    print(reverse_string('abcdefg'))
-    print(reverse_string('abcdefgh'))
+    print(reverse_string("abcdefg"))
+    print(reverse_string("abcdefgh"))
 
 
 if __name__ == "__main__":

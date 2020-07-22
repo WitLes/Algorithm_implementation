@@ -1,6 +1,3 @@
-import pdb
-
-
 class Node(object):
     def __init__(self, value, next=None):
         self.value = value
@@ -12,7 +9,7 @@ class Node(object):
 
 def print_link_list_value(head):
     while head:
-        print(head, end=' ')
+        print(head, end=" ")
         head = head.next
     print()
 
@@ -129,6 +126,46 @@ def reverse_link_list3(head):
     return reverse_head_sub
 
 
+def reverse_link_list4(head):
+    if head is None:
+        return head
+
+    new_head = None
+
+    p = head
+    while p:
+        p_next = p.next
+        p.next = new_head
+        new_head = p
+        p = p_next
+    return new_head
+
+
+def reverse_each_k(head, k):
+    def reverse(a, b):
+        new_head = None
+        p = a
+        while p != b:
+            p_next = p.next
+            p.next = new_head
+            new_head = p
+            p = p_next
+        return new_head
+
+    if not head:
+        return head
+
+    l = r = head
+    for _ in range(k):
+        if r:
+            r = r.next
+        else:
+            return head
+    reversed_seg_head = reverse(l, r)
+    l.next = reverse_each_k(r, k)
+    return reversed_seg_head
+
+
 def find_first_mutual_mode(head1, head2):
     stack1 = []
     stack2 = []
@@ -159,7 +196,7 @@ def test_merge_two_sorted_list():
 
 def test_reverse_link_list():
     head = gene_link_list([1, 2, 4, 5, 8, 9])
-    head = reverse_link_list3(head)
+    head = reverse_link_list4(head)
     print_link_list_value(head)
 
 
@@ -170,4 +207,4 @@ def test_get_last_k():
 
 
 if __name__ == "__main__":
-    test_merge_two_sorted_list()
+    test_reverse_link_list()
